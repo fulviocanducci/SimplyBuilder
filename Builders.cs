@@ -13,7 +13,7 @@ namespace Canducci.Simply.SqlBuilder
 
         public Builders(ILayout layout)
         {
-            Layout = layout;
+            Layout = layout; 
         }
 
         public static IColumns InsertFrom(ILayout layout, string table)
