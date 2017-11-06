@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Canducci.Simply.SqlBuilder", "Canducci.Simply.SqlBuilder.csproj", "{8BBF7759-C8A5-4039-B2C1-8CE89A717B0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Canducci.Simply.SqlBuilder", "SimplyBuilder/Canducci.Simply.SqlBuilder.csproj", "{8BBF7759-C8A5-4039-B2C1-8CE89A717B0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
