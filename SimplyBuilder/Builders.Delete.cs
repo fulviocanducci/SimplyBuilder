@@ -8,9 +8,9 @@ namespace Canducci.Simply.SqlBuilder
         public IWhereDelete Delete(string table, string schema = "")
         {
             if (string.IsNullOrWhiteSpace(schema))
-                StrQuery.Append($"DELETE FROM {table}");
+                StrQuery.Append($"DELETE FROM {Layout.Param(table)}");
             else
-                StrQuery.Append($"DELETE FROM {schema}.{table}");
+                StrQuery.Append($"DELETE FROM {Layout.Param(schema)}.{Layout.Param(table)}");
             return this;
         }
 

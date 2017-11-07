@@ -1,5 +1,4 @@
 ﻿using Canducci.Simply.SqlBuilder.Interfaces;
-using System;
 using System.Data.Common;
 namespace Canducci.Simply.SqlBuilder
 {

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Builders.Base.cs" />
     <None Include="Builders.Select.cs" />
   </ItemGroup>
 

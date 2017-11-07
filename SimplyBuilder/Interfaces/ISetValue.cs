@@ -1,9 +1,8 @@
 ﻿using System.Data.Common;
 namespace Canducci.Simply.SqlBuilder.Interfaces
 {
-    public interface ISetValue
+    public interface ISetValue: IWhereUpdate
     {
-        IWhere SetValue<T>(string field, T value)
-            where T : DbParameter;
+        //ISetValue SetValue<T>(string field, T value) where T : DbParameter;
     }
 }
