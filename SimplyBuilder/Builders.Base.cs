@@ -17,8 +17,8 @@ namespace Canducci.Simply.SqlBuilder
 
         public ISelect OrWhere<T>(string column, string compare, T parameter) where T : DbParameter
         {
-            AddWhereOr();
-            StrQuery.AppendFormat($"{Layout.Param(column)} {compare} {parameter.ParameterName}");
+            AddWhere("OR");
+            StrQuery.AppendFormat($"{Layout.Param(column)}{compare}{parameter.ParameterName}");
             Parameters.Add(parameter);
             return this;
         }
@@ -45,14 +45,21 @@ namespace Canducci.Simply.SqlBuilder
             return OrWhere<ParameterType, T>(column, "=", value, parameterName, dbType, nullMapping, parameterDirection, size);
         }
 
+        public ISelect OrWhereNull(string column)
+        {
+            AddWhere("OR");
+            StrQuery.AppendFormat($"{Layout.Param(column)} IS NULL");
+            return this;
+        }
+
         #endregion
 
         #region Where
 
         public ISelect Where<T>(string column, string compare, T parameter) where T : DbParameter
         {
-            AddWhereAnd();
-            StrQuery.AppendFormat($"{Layout.Param(column)} {compare} {parameter.ParameterName}");
+            AddWhere("AND");
+            StrQuery.AppendFormat($"{Layout.Param(column)}{compare}{parameter.ParameterName}");
             Parameters.Add(parameter);
             return this;
         }
@@ -77,6 +84,24 @@ namespace Canducci.Simply.SqlBuilder
             where T : struct
         {
             return Where<ParameterType, T>(column, "=", value, parameterName, dbType, nullMapping, parameterDirection, size);
+        }
+
+        public ISelect WhereBetween<T1, T2>(string column, T1 param1, T2 param2)
+            where T1 : DbParameter
+            where T2 : DbParameter
+        {
+            AddWhere("AND");
+            StrQuery.AppendFormat($"{Layout.Param(column)} BETWEEN {param1.ParameterName} AND {param2.ParameterName}");            
+            Parameters.Add(param1);            
+            Parameters.Add(param2);
+            return this;
+        }
+
+        public ISelect WhereNull(string column)
+        {
+            AddWhere("AND");
+            StrQuery.AppendFormat($"{Layout.Param(column)} IS NULL");
+            return this; 
         }
 
         ISelect IWhereType<ISelect>.Where<T>(string column, T parameter)

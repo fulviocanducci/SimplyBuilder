@@ -13,7 +13,7 @@ namespace Canducci.Simply.SqlBuilder
         public ISetValue SetValue<T>(string field, T value) where T : DbParameter
         {
             AddSetSeparator();
-            StrQuery.AppendFormat("[{0}]={1}", field, value.ParameterName);
+            StrQuery.AppendFormat("{0}={1}", Layout.Param(field), value.ParameterName);
             Parameters.Add(value);
             return this;
         }
@@ -47,6 +47,11 @@ namespace Canducci.Simply.SqlBuilder
             return (IWhereUpdate)OrWhere<ParameterType, T>(column, value, parameterName, dbType, nullMapping, parameterDirection, size);
         }
 
+        IWhereUpdate IWhereType<IWhereUpdate>.OrWhereNull(string column)
+        {
+            return (IWhereUpdate)OrWhereNull(column);
+        }
+
         IWhereUpdate IWhereUpdate.SetValue<T>(string field, T value)
         {
             return SetValue(field, value);
@@ -72,6 +77,14 @@ namespace Canducci.Simply.SqlBuilder
             return (IWhereUpdate)Where<ParameterType, T>(column, value, parameterName, dbType, nullMapping, parameterDirection, size);
         }
 
+        IWhereUpdate IWhereType<IWhereUpdate>.WhereBetween<T1, T2>(string column, T1 param1, T2 param2)
+        {
+            return (IWhereUpdate)WhereBetween(column, param1, param2);
+        }
 
+        IWhereUpdate IWhereType<IWhereUpdate>.WhereNull(string column)
+        {
+            return (IWhereUpdate)WhereNull(column);
+        }
     }
 }

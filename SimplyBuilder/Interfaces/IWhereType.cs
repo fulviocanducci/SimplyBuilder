@@ -22,5 +22,11 @@ namespace Canducci.Simply.SqlBuilder.Interfaces
         Q OrWhere<ParameterType, T>(string column, T value, string parameterName = null, DbType? dbType = null, bool nullMapping = false, ParameterDirection parameterDirection = ParameterDirection.Input, int? size = null)
             where ParameterType : DbParameter
             where T : struct;
+
+        Q WhereNull(string column);
+        Q OrWhereNull(string column);
+        Q WhereBetween<T1, T2>(string column, T1 param1, T2 param2)
+            where T1 : DbParameter
+            where T2 : DbParameter;
     }
 }

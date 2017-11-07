@@ -36,28 +36,20 @@ namespace Canducci.Simply.SqlBuilder
             return (new Builders(layout).From(table));
         }
 
-        public void AddWhereAnd()
+        public void AddWhere(string value)
         {
             if (StrQuery.ToString().Contains("WHERE") == false)
                 StrQuery.AppendFormat(" WHERE ");
             else
-                StrQuery.AppendFormat(" AND ");
-        }
-
-        public void AddWhereOr()
-        {
-            if (StrQuery.ToString().Contains("WHERE") == false)
-                StrQuery.AppendFormat(" WHERE ");
-            else
-                StrQuery.AppendFormat(" OR ");
-        }
+                StrQuery.AppendFormat($" {value} ");
+        }       
 
         public void AddSetSeparator()
         {
             if (!StrQuery.ToString().Contains("SET"))
                 StrQuery.AppendFormat(" SET ");
             else
-                StrQuery.AppendFormat(", ");
+                StrQuery.AppendFormat(",");
         }
     }
 }

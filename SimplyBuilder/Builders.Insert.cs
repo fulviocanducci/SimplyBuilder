@@ -4,6 +4,12 @@ namespace Canducci.Simply.SqlBuilder
 {
     public partial class Builders : IInsert, IColumns, IValues, IBuilder, IIdentity
     {
+        IValues IColumns.Columns(string value)
+        {
+            string[] c = value.Trim().TrimEnd().TrimStart().Replace(" ", "").Split(',');
+            return Columns(c);
+        }
+
         public IValues Columns(params string[] values)
         {
             StrQuery.AppendFormat("({0}) ", Layout.Open() + string.Join($"{Layout.Close()},{Layout.Open()}", values) + Layout.Close());
@@ -44,7 +50,7 @@ namespace Canducci.Simply.SqlBuilder
                         break;
                     }
             }
-            StrQuery.Append($"SELECT CAST(SCOPE_IDENTITY() AS {returnType});");
+            StrQuery.Append($"{Layout.LastInsertedId(returnType)}");
             return this;
         }
         
@@ -56,5 +62,7 @@ namespace Canducci.Simply.SqlBuilder
                 StrQuery.Append($"INSERT INTO {Layout.Param(schema)}.{Layout.Param(table)}");
             return this;
         }
+
+        
     }
 }
